@@ -1,0 +1,17 @@
+(*  length.while
+    This program computes the length of input list X.
+    The length is defined as the number of elements in the list.
+    The output is thus (the encoding of a ) natural number.
+
+   (c) 2008-16 Bernhard Reus 
+*)
+
+length read X {
+  L := 0;                 // initialise length counter with "0"
+  while X {                // loop "walks" along the spine of the list
+       X := tl X;          //  move one level done the spine, in other words, 
+                           //  compute the rest of the list without the head
+       L := cons nil L    // accordingly increment counter
+   }
+}
+write L

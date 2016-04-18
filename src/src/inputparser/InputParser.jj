@@ -1,0 +1,194 @@
+/*
+InputParser
+Version 1.0.1
+*/
+PARSER_BEGIN(InputParser)
+
+package src.inputparser;
+
+import src.datatype.*;
+import java.util.LinkedList;
+import src.interpreter.InterpreterException;
+
+public class InputParser {
+  private static InputParser parser = null;
+  /*
+  public static void main(String[] args) {
+    try {
+      System.out.println(run(args[0]).dataToString());
+    } catch (ParseException e) {
+      System.out.println(e);
+    } catch (InterpreterException e) {
+      System.out.println(e.getError());
+    }
+  }
+  */
+  public static Data run(String input) throws ParseException, InterpreterException {
+    try {
+      if (parser == null) {
+      parser = new InputParser(new java.io.StringReader(input));
+    } else {
+      ReInit(new java.io.StringReader(input));
+    }
+      return programOrExpr();
+    } catch (TokenMgrError e) {
+      throw new InterpreterException("Token Error", "Check for misspelt words.",  e.getMessage());
+    } catch (java.lang.NumberFormatException e) {
+      throw new InterpreterException("NumberFormatException", "Number too big to be an Integer, use a tree.", e.getMessage());
+    } /*catch (Exception e) {
+      throw new InterpreterException(e.getClass().toString(), "None", e.getMessage());
+    }*/
+  }
+}
+
+PARSER_END(InputParser)
+
+// SKIP characters, white space, tabs, carriage returns, new lines
+SKIP: { " " | "\t" | "\r" | "\n" }
+
+//encodings for data in the input
+TOKEN: {
+    <ASSIGN: ":="           >
+  | <WHILE: "while"         >
+  | <IF: "if"               >
+  | <QUOTE: "quote"         >
+  | <NIL: "nil"             >
+  | <VAR: "var"             >
+  | <CONS: "cons"           >
+  | <HD: "hd"               >
+  | <TL: "tl"               >
+  | <NUM: (["0"-"9"])+      >
+  | <BOOLEAN: "true"|"false">
+}
+
+public Data programOrExpr(): { Data d = null; } {
+    LOOKAHEAD("[" <NUM> "," block() "," <NUM> "]")
+    d=program() <EOF> { return d; }
+  |
+    d=expr() <EOF> { return d; }
+  | <EOF> { return new Nil(); }
+}
+
+//tree, list, nil, or expr
+public Data expr(): { Token t; } {
+    <NIL> { return new Nil(); }
+  |
+    t=<NUM> { return new Num(t.image); }
+  |
+    t=<BOOLEAN> { return new Bool(t.image); }
+  |
+    (t=<QUOTE>|t=<VAR>|t=<CONS>|t=<HD>|t=<TL>|t=<ASSIGN>|t=<WHILE>|t=<IF>)
+    { return new Atom(t.image); }
+  |
+    "<" {Data d1, d2;} d1=expr() "." d2=expr() ">" {
+      return new Tree(d1.getData(), d2.getData());
+    }
+  |
+    ( LOOKAHEAD("[" "]") //check if empty list first
+      "[" "]" { return new Nil(); }
+      |
+      { LinkedList<Data> list = new LinkedList<Data>(); Data d; }
+      "[" d=exprList(list) "]" { return d; }
+    )
+  |
+    "(" { Data d; } d=expr() ")" { return d; }
+}
+
+public List exprList(LinkedList<Data> list): { Data d; List l; } {
+  LOOKAHEAD(expr() "," exprList())
+    d=expr() { list.addLast(d); } "," l=exprList(list) { return l; }
+  |
+    d=expr() { list.addLast(d); return new List(list); }
+}
+
+public List program(): { Token in, out;
+                         List b;
+                         LinkedList<Data> programdata = new LinkedList<Data>();
+                       } {
+  "[" in=<NUM> "," b=block() "," out=<NUM> "]" {
+    programdata.add(new Num(in.image));
+    programdata.add(b);
+    programdata.add(new Num(out.image));
+    return new List(programdata);
+  }
+}
+
+public List block(): { Data d; 
+                       LinkedList<Data> s = new LinkedList<Data>();
+                     } {
+  "[" (s=statements())? "]" { return new List(s); }
+}
+
+public LinkedList<Data> statements(): { List cmd;
+                                        LinkedList<Data> s2 = new LinkedList<Data>();
+                                      } {
+  cmd=command() ("," s2=statements())? {
+    LinkedList<Data> statements = new LinkedList<Data>();
+    statements.add(cmd);
+    for(Data c: s2) {
+      statements.add(c);
+    }
+    return statements;
+  }
+}
+
+public List command(): { Token num; List e1,e2,e3;
+                         LinkedList<Data> cmd = new LinkedList<Data>();
+                       } {
+  "[" (
+      <ASSIGN> "," num=<NUM> "," e1=progExpr() {
+        cmd.add(new Atom(":="));
+        cmd.add(new Num(num.image));
+        cmd.add(e1);
+      }
+    |
+      <WHILE> "," e1=progExpr() "," e2=block() {
+        cmd.add(new Atom("while"));
+        cmd.add(e1);
+        cmd.add(e2);
+      }
+    |
+      <IF> "," e1=progExpr() "," e2=block() "," e3=block() {
+        cmd.add(new Atom("if"));
+        cmd.add(e1);
+        cmd.add(e2);
+        cmd.add(e3);
+      }
+  )
+  "]" { return new List(cmd); }
+}
+
+public List progExpr(): { Token num;
+                          List e1,e2;
+                          LinkedList<Data> expr = new LinkedList<Data>(); 
+                        } {
+  "["
+    (
+      <QUOTE> "," <NIL> {
+        expr.add(new Atom("quote"));
+        expr.add(new Nil());
+      }
+    |
+      <VAR> "," num=<NUM> {
+        expr.add(new Atom("var"));
+        expr.add(new Num(num.image));
+      }
+    |
+      <CONS> "," e1=progExpr() "," e2=progExpr() {
+        expr.add(new Atom("cons"));
+        expr.add(e1);
+        expr.add(e2);
+      }
+    |
+      <HD> "," e1=progExpr() {
+        expr.add(new Atom("hd"));
+        expr.add(e1);
+      }
+    |
+      <TL> "," e1=progExpr() {
+        expr.add(new Atom("tl"));
+        expr.add(e1);
+      }
+    )
+  "]" { return new List(expr); }
+}

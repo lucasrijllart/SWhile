@@ -1,0 +1,76 @@
+(* equal.while
+
+   Takes as input a list [t1, t2] and returns whether t1=t2.
+   Here, t1 and t2 can be arbitrary trees.
+   To save intermediate trees that still need checking, we use a STACK.
+   This means we use a list and operate on it as if it were a stack where
+   the top of the stack is the beginning of the list.
+
+   To see how this works, I recommend you run
+
+    hwhile  -dl  PROGRAMS/equal.while "[[1,0],[1,1]]"
+
+   and in the resulting trace observe the changes in the STACK variable, as well as A and B.
+   
+   Note that the program is actually quite short, most lines are comments :-).
+   
+   (c) 2008-16 Bernhard Reus 
+*)
+
+
+equal read L {
+	EQUALS := true;
+	X := hd L;
+	Y := hd tl L;
+	//check if X and Y are equal trees
+
+	//initialise the stack, at the end if STACK = nil 
+	// then we have popped everything out.
+	STACK := cons Y cons X  nil;  // 2nd tree always goes on last;
+	
+	while STACK {
+		// pop top two trees from STACK that still need comparison
+		B := hd STACK;
+		STACK := tl STACK;
+		A := hd STACK;
+		STACK := tl STACK;
+		// check the popped trees for being not nil
+		if A {
+			if B {
+				//if A && B
+				//then the entries are of form <x.y> and <s.t>
+				//we keep traversing the trees
+				//depth first and we push the 
+				//subtrees on the stack in the order
+				// y t x s
+				// This means first the tails
+				STACK := cons tl B cons tl A STACK;
+				// then the heads
+				STACK := cons hd B cons hd A STACK
+				// so we will first pop out the heads again that we pushed last.
+				// This means we go depth-first into the trees.			    
+			}
+			 else {
+				//Oops, both trees’ structure do not match, A is not nil
+				// but B is, so we exit with a negative answer
+				EQUALS := false;
+				STACK := nil
+                               }
+                    }
+		else {
+			if B {
+				//Oops, if we are here it means that
+				//we have A = nil but B is not nil;
+				//therefore we exit with a negative answer
+				EQUALS := false;
+				STACK := nil
+                            }   
+		                // otherwise A and B are nil (thus equal) and we continue checking trees form stack,
+				// so the else-case does not need to do anything so it is dropped
+                             
+               }
+       }   // end while
+}
+				
+write EQUALS
+		

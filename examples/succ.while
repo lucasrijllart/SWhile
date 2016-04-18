@@ -1,0 +1,19 @@
+(* succ.while
+
+ This program computes the successor of a given
+ natural number (in unary encoding) in case
+ the input does encode a natural number.
+
+ On non-numbers it has obviously the effect of adding
+ an empty tree (nil) to the left hand side of
+ the input tree.
+
+ (c) 2009-16 Bernhard Reus 
+
+*)
+
+
+succ read X {
+ X:= cons nil X
+}
+write X

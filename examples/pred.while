@@ -1,0 +1,22 @@
+(* pred.while
+
+  This program computes the predecessor of the
+  natural number (in unary encoding) in case
+  the input does encode a natural number.
+      
+  Exceptional case: if the input is 0 (nil),
+  the program returns 0 (nil) as -1 is not
+  a natural number.
+
+  On non-numbers it has obviously the effect of returning
+  the tail of the input tree.
+
+   (c) 2009-16 Bernhard Reus 
+
+*)
+
+
+pred read X {
+ X:= tl X
+}
+write X

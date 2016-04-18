@@ -1,0 +1,17 @@
+(* reverse.while
+
+  Reverses the input (considered as a list X encoded in the usual way)
+  as seen in Lecture 3.
+
+  (c) 2008-16 Bernhard Reus 
+
+*)
+
+reverse read X {
+  Y:= nil;
+  while X {
+  	Y := cons hd X Y;
+  	X := tl X
+ }
+}
+write Y

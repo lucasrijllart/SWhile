@@ -1,0 +1,21 @@
+(* add.while
+
+  A simple addition program.
+  
+ This program, when given as input a list XY = [m,n],
+ returns m+n where m and n are considered unary numbers
+ by the nil^i encoding via lists of nil's.
+ If the input is not a list of (at least two) numbers.
+
+ (c) 2009-16 Bernhard Reus.
+ 
+*)
+
+add read  XY {
+    X := hd XY;
+    Y := hd tl XY;
+    while X {
+        Y := <succ> Y;
+        X := <pred> X
+    }
+} write Y

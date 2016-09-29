@@ -10,34 +10,18 @@ public class List extends Data {
 
     private LinkedList<Data> values;
 
-    /**
-     *
-     * @param l
-     */
     public List(LinkedList<Data> l) {
         values = l;
     }
-    
-    /**
-     *
-     * @param d
-     */
-    public void addElement(Data d) {
-        this.values.add(d);
-    }
 
-    /**
-     *
-     * @return
-     */
+    public List() { values = new LinkedList<>(); }
+    
+    public void addElement(Data d) { this.values.addFirst(d); }
+
     public LinkedList<Data> getList() {
         return this.values;
     }
 
-    /**
-     *
-     * @return
-     */
     @Override
     public Data getData() {
         LinkedList<Data> list = new LinkedList<>();

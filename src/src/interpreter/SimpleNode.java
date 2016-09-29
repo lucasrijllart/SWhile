@@ -52,14 +52,12 @@ class SimpleNode extends BaseNode implements Node {
   public Object jjtGetValue() { return value; }
 
   /** Accept the visitor. **/
-  public Object jjtAccept(ProgramParserVisitor visitor, Object data)
-{
+  public Object jjtAccept(ProgramParserVisitor visitor, Object data) throws InterpreterException {
     return visitor.visit(this, data);
   }
 
   /** Accept the visitor. **/
-  public Object childrenAccept(ProgramParserVisitor visitor, Object data)
-{
+  public Object childrenAccept(ProgramParserVisitor visitor, Object data) throws InterpreterException {
     if (children != null) {
       for (int i = 0; i < children.length; ++i) {
         children[i].jjtAccept(visitor, data);

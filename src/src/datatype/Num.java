@@ -8,26 +8,14 @@ public class Num extends Data {
 
     private final Integer value;
 
-    /**
-     *
-     * @param s
-     */
     public Num(String s) {
         this.value = Integer.parseInt(s);
     }
 
-    /**
-     *
-     * @return
-     */
     public Integer getInt() {
         return this.value;
     }
 
-    /**
-     *
-     * @return
-     */
     @Override
     public Data getData() {
         Tree intToTree;

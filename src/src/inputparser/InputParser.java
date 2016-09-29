@@ -29,7 +29,7 @@ public class InputParser implements InputParserConstants {
       return parser.programOrExpr();
     } catch (TokenMgrError e) {
       throw new InterpreterException("Token Error", "Check for misspelt words.",  e.getMessage());
-    } catch (java.lang.NumberFormatException e) {
+    } catch (NumberFormatException e) {
       throw new InterpreterException("NumberFormatException", "Number too big to be an Integer, use a tree.", e.getMessage());
     } /*catch (Exception e) {
       throw new InterpreterException(e.getClass().toString(), "None", e.getMessage());
@@ -870,7 +870,7 @@ expr.add(new Atom("tl"));
   }
 
   @SuppressWarnings("serial")
-  static private final class LookaheadSuccess extends java.lang.Error { }
+  static private final class LookaheadSuccess extends Error { }
   static final private LookaheadSuccess jj_ls = new LookaheadSuccess();
   static private boolean jj_scan_token(int kind) {
     if (jj_scanpos == jj_lastpos) {

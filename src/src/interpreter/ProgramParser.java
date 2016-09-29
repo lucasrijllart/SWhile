@@ -74,8 +74,13 @@ public class ProgramParser/*@bgen(jjtree)*/implements ProgramParserTreeConstants
     //new interpreter (visitor)
     ProgramVisitor v = new ProgramVisitor();
     //start interpreter and accept first node, print result
+    try {
     Data output = (Data) program.jjtAccept(v, null);
     return output;
+    } catch (InterpreterException e) {
+    System.out.println(e.getError() + " " + e.getSuggestion() + " " + e.getMessage());
+        throw new InterpreterException(e.getError(), e.getSuggestion(), e.getErrorMessage());
+    }
   }
 
   //debug program
@@ -1425,7 +1430,7 @@ if (jjtc000) {
   }
 
   @SuppressWarnings("serial")
-  static private final class LookaheadSuccess extends java.lang.Error { }
+  static private final class LookaheadSuccess extends Error { }
   final private LookaheadSuccess jj_ls = new LookaheadSuccess();
   private boolean jj_scan_token(int kind) {
     if (jj_scanpos == jj_lastpos) {

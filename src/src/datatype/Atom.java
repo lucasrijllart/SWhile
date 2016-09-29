@@ -2,18 +2,13 @@ package src.datatype;
 
 /**
  *
- * @author Lucas Rijllart
+ * @author Lucas
  */
 public class Atom extends Data {
     
     private final String value;
     private final Data rawData;
     
-    /**
-     *
-     * @param s holds the name of the atom, which is then created depending on
-     *          its name
-     */
     public Atom(String s) {
         this.value = s;
         switch (s) {
@@ -54,12 +49,6 @@ public class Atom extends Data {
         }
     }
     
-    /**
-     * 
-     * @param generations   number of generations of nodes that need to be
-     *                      created
-     * @return              the constructed binary tree
-     */
     private Data makeTree(int generations) {
         Data returnTree = new Nil();
         for (int i = 0; i < generations; i++) {
@@ -68,18 +57,10 @@ public class Atom extends Data {
         return returnTree;
     }
     
-    /**
-     *
-     * @return string value of the atom
-     */
     public String getValue() {
         return this.value;
     }
     
-    /**
-     *
-     * @return data value of the atom
-     */
     @Override
     public Data getData() {
         return rawData;

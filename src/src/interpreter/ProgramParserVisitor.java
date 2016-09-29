@@ -3,28 +3,28 @@ package src.interpreter;
 
 public interface ProgramParserVisitor
 {
-  public Object visit(SimpleNode node, Object data);
-  public Object visit(ASTProgram node, Object data);
-  public Object visit(ASTprogname node, Object data);
-  public Object visit(ASTinput node, Object data);
-  public Object visit(ASToutput node, Object data);
-  public Object visit(ASTBlock node, Object data);
-  public Object visit(ASTMacro node, Object data);
-  public Object visit(ASTAssign node, Object data);
-  public Object visit(ASTWhile node, Object data);
-  public Object visit(ASTIf node, Object data);
-  public Object visit(ASTSwitch node, Object data);
-  public Object visit(ASTCase node, Object data);
-  public Object visit(ASTExprList node, Object data);
-  public Object visit(ASTDefaultCase node, Object data);
-  public Object visit(ASTEqual node, Object data);
-  public Object visit(ASTnil node, Object data);
-  public Object visit(ASTCons node, Object data);
-  public Object visit(ASTatom node, Object data);
-  public Object visit(ASTHd node, Object data);
-  public Object visit(ASTTl node, Object data);
-  public Object visit(ASTnum node, Object data);
-  public Object visit(ASTbool node, Object data);
-  public Object visit(ASTvar node, Object data);
+  public Object visit(SimpleNode node, Object data)throws InterpreterException;
+  public Object visit(ASTProgram node, Object data)throws InterpreterException;
+  public Object visit(ASTprogname node, Object data)throws InterpreterException;
+  public Object visit(ASTinput node, Object data)throws InterpreterException;
+  public Object visit(ASToutput node, Object data)throws InterpreterException;
+  public Object visit(ASTBlock node, Object data)throws InterpreterException;
+  public Object visit(ASTMacro node, Object data)throws InterpreterException;
+  public Object visit(ASTAssign node, Object data) throws InterpreterException;
+  public Object visit(ASTWhile node, Object data) throws InterpreterException;
+  public Object visit(ASTIf node, Object data)throws InterpreterException;
+  public Object visit(ASTSwitch node, Object data)throws InterpreterException;
+  public Object visit(ASTCase node, Object data)throws InterpreterException;
+  public Object visit(ASTExprList node, Object data)throws InterpreterException;
+  public Object visit(ASTDefaultCase node, Object data)throws InterpreterException;
+  public Object visit(ASTEqual node, Object data)throws InterpreterException;
+  public Object visit(ASTnil node, Object data)throws InterpreterException;
+  public Object visit(ASTCons node, Object data)throws InterpreterException;
+  public Object visit(ASTatom node, Object data)throws InterpreterException;
+  public Object visit(ASTHd node, Object data)throws InterpreterException;
+  public Object visit(ASTTl node, Object data)throws InterpreterException;
+  public Object visit(ASTnum node, Object data)throws InterpreterException;
+  public Object visit(ASTbool node, Object data)throws InterpreterException;
+  public Object visit(ASTvar node, Object data)throws InterpreterException;
 }
 /* JavaCC - OriginalChecksum=e2a9287891eb0afbff0f5f9b3430475d (do not edit this line) */

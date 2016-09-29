@@ -14,7 +14,7 @@ class ASTCase extends SimpleNode {
 
 
   /** Accept the visitor. **/
-  public Object jjtAccept(ProgramParserVisitor visitor, Object data) {
+  public Object jjtAccept(ProgramParserVisitor visitor, Object data) throws InterpreterException {
 
     return
     visitor.visit(this, data);

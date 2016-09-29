@@ -17,4 +17,6 @@ public class InterpreterException extends Exception {
     public String getSuggestion() {
         return suggestion;
     }
+
+    public String getErrorMessage() { return message; }
 }

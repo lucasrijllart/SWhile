@@ -2,77 +2,77 @@
 package src.interpreter;
 
 public class ProgramParserDefaultVisitor implements ProgramParserVisitor{
-  public Object defaultVisit(SimpleNode node, Object data){
+  public Object defaultVisit(SimpleNode node, Object data) throws InterpreterException {
     node.childrenAccept(this, data);
     return data;
   }
-  public Object visit(SimpleNode node, Object data){
+  public Object visit(SimpleNode node, Object data) throws InterpreterException {
     return defaultVisit(node, data);
   }
-  public Object visit(ASTProgram node, Object data){
+  public Object visit(ASTProgram node, Object data) throws InterpreterException {
     return defaultVisit(node, data);
   }
-  public Object visit(ASTprogname node, Object data){
+  public Object visit(ASTprogname node, Object data) throws InterpreterException {
     return defaultVisit(node, data);
   }
-  public Object visit(ASTinput node, Object data){
+  public Object visit(ASTinput node, Object data) throws InterpreterException{
     return defaultVisit(node, data);
   }
-  public Object visit(ASToutput node, Object data){
+  public Object visit(ASToutput node, Object data) throws InterpreterException{
     return defaultVisit(node, data);
   }
-  public Object visit(ASTBlock node, Object data){
+  public Object visit(ASTBlock node, Object data) throws InterpreterException{
     return defaultVisit(node, data);
   }
-  public Object visit(ASTMacro node, Object data){
+  public Object visit(ASTMacro node, Object data) throws InterpreterException{
     return defaultVisit(node, data);
   }
-  public Object visit(ASTAssign node, Object data){
+  public Object visit(ASTAssign node, Object data) throws InterpreterException{
     return defaultVisit(node, data);
   }
-  public Object visit(ASTWhile node, Object data){
+  public Object visit(ASTWhile node, Object data) throws InterpreterException{
     return defaultVisit(node, data);
   }
-  public Object visit(ASTIf node, Object data){
+  public Object visit(ASTIf node, Object data) throws InterpreterException{
     return defaultVisit(node, data);
   }
-  public Object visit(ASTSwitch node, Object data){
+  public Object visit(ASTSwitch node, Object data) throws InterpreterException{
     return defaultVisit(node, data);
   }
-  public Object visit(ASTCase node, Object data){
+  public Object visit(ASTCase node, Object data) throws InterpreterException{
     return defaultVisit(node, data);
   }
-  public Object visit(ASTExprList node, Object data){
+  public Object visit(ASTExprList node, Object data) throws InterpreterException{
     return defaultVisit(node, data);
   }
-  public Object visit(ASTDefaultCase node, Object data){
+  public Object visit(ASTDefaultCase node, Object data) throws InterpreterException{
     return defaultVisit(node, data);
   }
-  public Object visit(ASTEqual node, Object data){
+  public Object visit(ASTEqual node, Object data) throws InterpreterException{
     return defaultVisit(node, data);
   }
-  public Object visit(ASTnil node, Object data){
+  public Object visit(ASTnil node, Object data) throws InterpreterException{
     return defaultVisit(node, data);
   }
-  public Object visit(ASTCons node, Object data){
+  public Object visit(ASTCons node, Object data) throws InterpreterException{
     return defaultVisit(node, data);
   }
-  public Object visit(ASTatom node, Object data){
+  public Object visit(ASTatom node, Object data) throws InterpreterException{
     return defaultVisit(node, data);
   }
-  public Object visit(ASTHd node, Object data){
+  public Object visit(ASTHd node, Object data) throws InterpreterException{
     return defaultVisit(node, data);
   }
-  public Object visit(ASTTl node, Object data){
+  public Object visit(ASTTl node, Object data) throws InterpreterException{
     return defaultVisit(node, data);
   }
-  public Object visit(ASTnum node, Object data){
+  public Object visit(ASTnum node, Object data) throws InterpreterException{
     return defaultVisit(node, data);
   }
-  public Object visit(ASTbool node, Object data){
+  public Object visit(ASTbool node, Object data) throws InterpreterException{
     return defaultVisit(node, data);
   }
-  public Object visit(ASTvar node, Object data){
+  public Object visit(ASTvar node, Object data) throws InterpreterException{
     return defaultVisit(node, data);
   }
 }

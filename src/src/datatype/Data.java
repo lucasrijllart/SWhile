@@ -2,16 +2,8 @@ package src.datatype;
 
 import java.util.LinkedList;
 
-/**
- *
- * @author Lucas
- */
 public abstract class Data {
 
-    /**
-     *
-     * @return
-     */
     public abstract Data getData();
 
     /*
@@ -29,22 +21,10 @@ public abstract class Data {
     
      OR dataToTree(data).equals(dataToTree(data2))
      */
-
-    /**
-     *
-     * @param expr2
-     * @return
-     */
-    
     public boolean equality(Data expr2) {
         return equals3(expr2);
     }
 
-    /**
-     *
-     * @param ex2
-     * @return
-     */
     public boolean equals1(Data ex2) {
     	Data expr1 = this;
         Data expr2 = ex2;
@@ -57,12 +37,6 @@ public abstract class Data {
         return d1.equals(d2);
     }
     
-    /**
-     *
-     * @param expr1
-     * @param expr2
-     * @return
-     */
     public boolean equals2(Data expr1, Data expr2) {
         if (expr1 instanceof Var) expr1 = expr1.getData();
         if (expr2 instanceof Var) expr2 = expr2.getData();
@@ -85,11 +59,6 @@ public abstract class Data {
         return equals2(r1, r2);
     }
     
-    /**
-     *
-     * @param exp2
-     * @return
-     */
     public boolean equals3(Data exp2) {
         Data expr1 = this;
         Data expr2 = exp2;
@@ -126,13 +95,8 @@ public abstract class Data {
     }
     
     //allows to get the representation of data into readable form
-
-    /**
-     *
-     * @param d
-     * @return
-     */
-        public String dataToString(Data d) {
+    public String dataToString(Data d) {
+        System.out.println("Here 1: " + d);
         if (d instanceof Nil) {
             return "nil";
         } else if (d instanceof Num) {
@@ -152,6 +116,7 @@ public abstract class Data {
             return dataToString(((Var) d).getData());
         } else if (d instanceof List) { //contains other data, recusive call
             String finalOutput = "[";
+            System.out.println("Here 2");
             LinkedList<Data> list = ((List)d).getList();
             if (!list.isEmpty()) {
                 for (int i = 0; i < list.size()-1; i++) {
@@ -177,12 +142,7 @@ public abstract class Data {
         }
     }
     //allows to get the representation of data into readable form
-
-    /**
-     *
-     * @return
-     */
-        public String dataToString() {
+    public String dataToString() {
         return dataToString(this);
     }
 }

@@ -46,5 +46,5 @@ Every other operation will get the tail of the binary tree
 
 — — — — — — — — — — — —
 Contact
-Please contact me at: l.rijllart@gmail.com
+Please contact me at: lr255@sussex.ac.uk
 or contact the supervisor of this project: bernhard@sussex.ac.uk 

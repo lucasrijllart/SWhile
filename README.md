@@ -19,24 +19,34 @@ If a number should be bigger than 2^32, use a tree and not a number.
 Types in SWhile are implicit. Every variable can hold any type of expression, but variables are not bound to any type. To check which operations are valid on types, check the Know operations below.
 
 ### Known operations
-CONS 	nil num   : num + 1
+```
+CONS
+	nil num   : num + 1
 	nil bool  : if bool is false, true
 	bool nil  : if bool is false, true
-
 	nil list  : add nil to list
 	num list  : add num to list
 	bool list : add bool to list
 	list list : add list to list
 	atom list : add atom to list
+```
+
 Every other operation will add the binary tree values together
 
-HD	bool : false
+```
+HD
+	bool : false
 	list : first element of list
+```
+
 Every other operation will get the head of the binary tree
 
-TL	num  : num - 1
+```
+TL
+	num  : num - 1
 	bool : false
 	list : remove first element of list
+```
 Every other operation will get the tail of the binary tree
 
 

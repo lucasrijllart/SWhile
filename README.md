@@ -49,6 +49,16 @@ TL
 ```
 Every other operation will get the tail of the binary tree
 
+### Preview
+See the [poster presentation](https://github.com/lucasrijllart/SWhile/files/5321945/118472_Poster.pdf)
+
+Main IDE screen:
+
+![Main_Screen](https://user-images.githubusercontent.com/11093148/94996175-f0eb7f80-059a-11eb-9c5f-4f10bdf0414e.png)
+
+Example of translator functionality:
+
+![Translator](https://user-images.githubusercontent.com/11093148/94996180-f34dd980-059a-11eb-8476-6d83b3e77e0a.png)
 
 ### Contact
 Please contact me at: lr255@sussex.ac.uk
